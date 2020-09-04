@@ -1,36 +1,33 @@
-const Promise = require("bluebird");
-const mysql = require("mysql");
+const mod = require("./addrecord");
+const read = require("./readrecord");
+
+/*
+mod.addrecordParam(
+    1,
+    "Sayali",
+    "s@gmail.com",
+    "shirdi",
+    "8830946065",
+);
+*/
+/*mod.addRecordParam1({
+    id: 2,
+    name: "Sayali",
+    email: "s@gmail",
+    address: "loni",
+    mobile: 8830,
+});
+*/
 
 
-//promisify
-Promise.promisifyAll(require("mysql/lib/Connection").prototype);
-Promise.promisifyAll(require("mysql/lib/Pool").prototype);
+mod.addRecordParam1({
+    id: 3,
+    name: "Sae",
+    email: "p@gmail",
+    address: "pune",
+    mobile: 8830,
+});
 
-let readcustomers = async () => {
-    try {
-        const connection = mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            password: "cdac",
-            database: "dbt",
-        });
-
-        //establish connection here
-        await connection.connectAsync();
-
-        //query
-        let sql = "select *from customers";
-        let result = await connection.queryAsync(sql);
-        console.log(result);
-
-        //release connection
-        await connection.endAsync();
-        return result;
-    } catch (err) {
-        console.log(err);
-    }
-};
-
-readcustomers();
-
-
+//addrecordParam1();
+//let rec = read.readrecords;
+//console.log(rec);
