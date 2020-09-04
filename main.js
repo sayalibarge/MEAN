@@ -1,33 +1,26 @@
-const mod = require("./addrecord");
-const read = require("./readrecord");
+const ex = require('express');
 
-/*
-mod.addrecordParam(
-    1,
-    "Sayali",
-    "s@gmail.com",
-    "shirdi",
-    "8830946065",
-);
-*/
-/*mod.addRecordParam1({
-    id: 2,
-    name: "Sayali",
-    email: "s@gmail",
-    address: "loni",
-    mobile: 8830,
-});
-*/
+const obj = ex();
+const c = require('cors');
 
+obj.use(c());
+obj.use(ex.json());
 
-mod.addRecordParam1({
-    id: 3,
-    name: "Sae",
-    email: "p@gmail",
-    address: "pune",
-    mobile: 8830,
+const data = require('./data');
+
+obj.get('/enter', async (req, res) => {
+
+    try {
+        const place = req.query;
+        await data.insertval(place);
+
+        res.json({ msg: "success" })
+    } catch (err) {
+        res.json({ msg: "fail" })
+    }
+
 });
 
-//addrecordParam1();
-//let rec = read.readrecords;
-//console.log(rec);
+
+
+obj.listen(8080);
